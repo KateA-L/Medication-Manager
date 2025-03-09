@@ -11,7 +11,7 @@
         <!-- Navigation Bar -->
         <nav class="navbar">
             <ul>
-                <li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="showSection('dashboard')" class="active">Dashboard</a></li>
                 <li><a href="#" onclick="showSection('medication')">Medications</a></li>
                 <li><a href="#" onclick="showSection('symptoms')">Symptoms</a></li>
                 <li><a href="#" onclick="showSection('reminders')">Reminders</a></li>
@@ -32,6 +32,7 @@
                 <div class="stat-box">
                     <h3>Symptom Log</h3>
                     <p id="symptomCount">Symptoms logged: 0</p>
+                    <button onclick="showSection('symptoms')">Log Symptoms</button>
                 </div>
                 <div class="stat-box">
                     <h3>Upcoming Reminders</h3>
@@ -46,9 +47,7 @@
         <div id="medication" class="hub-section">
             <h2>Medications</h2>
             <div class="medication-form">
-                <label for="medName">Medication Name:</label>
                 <input type="text" id="medName" placeholder="Enter medication name">
-                <label for="medDose">Dosage:</label>
                 <input type="text" id="medDose" placeholder="Enter dosage">
                 <button onclick="addMedication()">Add Medication</button>
             </div>
