@@ -45,9 +45,10 @@ html, body {
 }
 
 .navbar a {
-    color: black;
+    color: white;
     text-decoration: none;
     font-size: 18px;
+    font-weight: bold;
 }
 
 .navbar a:hover {

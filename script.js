@@ -7,20 +7,22 @@ function showSection(sectionId) {
     document.querySelectorAll('.hub-section').forEach(sec => sec.classList.remove('active'));
     document.getElementById(sectionId).classList.add('active');
 
-    // HIGHLIGHT ACTIVE NAVIGATION TAB
+    // Highlight active navigation tab
     document.querySelectorAll('.navbar a').forEach(link => link.classList.remove('active'));
-    document.querySelector(`.navbar a[href*="${sectionId}"]`).classList.add('active');
+    const activeLink = document.querySelector(`.navbar a[href*="${sectionId}"]`);
+    if (activeLink) activeLink.classList.add('active');
 
     if (sectionId === 'dashboard') updateDashboardStats();
 }
 
 // Add medication to list
 function addMedication() {
-    const name = document.getElementById('medName').value;
-    const dose = document.getElementById('medDose').value;
+    const name = document.getElementById('medName').value.trim();
+    const dose = document.getElementById('medDose').value.trim();
     
     if (name && dose) {
         medications.push({ name, dose, taken: false });
+        saveData();  // Save after adding medication
         renderMedicationList();
         document.getElementById('medName').value = '';
         document.getElementById('medDose').value = '';
@@ -32,20 +34,26 @@ function addMedication() {
 // Render the medication list including remove button
 function renderMedicationList() {
     const medicationList = document.getElementById('medicationList');
-    medicationList.innerHTML = '';
-    medicationList.innerHTML += `
-    <div class="medication-item">
-        <span>${med.name} - ${med.dose}</span>
-        <button onclick="markAsTaken(${index})">${med.taken ? '✔ Taken' : 'Mark as Taken'}</button>
-        <button onclick="removeMedication(${index})">🗑 Remove</button>
-    </div>`;
-};
+    medicationList.innerHTML = ''; // Clear existing list
 
-//Remove medication
+    medications.forEach((med, index) => {
+        const medItem = document.createElement('div');
+        medItem.className = 'medication-item';
+        medItem.innerHTML = `
+            <span>${med.name} - ${med.dose}</span>
+            <button onclick="markAsTaken(${index})">${med.taken ? '✔ Taken' : 'Mark as Taken'}</button>
+            <button onclick="removeMedication(${index})">🗑 Remove</button>
+        `;
+        medicationList.appendChild(medItem);
+    });
+}
+
+// Remove medication
 function removeMedication(index) {
     medications.splice(index, 1);
     saveData();
     renderMedicationList();
+    updateDashboardStats(); // Ensure dashboard updates after removal
 }
 
 // Mark medication as taken
@@ -58,10 +66,11 @@ function markAsTaken(index) {
 
 // Log symptom
 function logSymptom() {
-    const symptom = document.getElementById('symptomText').value;
+    const symptom = document.getElementById('symptomText').value.trim();
     
     if (symptom) {
         symptoms.push(symptom);
+        saveData();
         document.getElementById('symptomText').value = '';
         updateDashboardStats();
     } else {
@@ -74,6 +83,7 @@ function setReminder() {
     const reminderText = prompt("Enter your reminder:");
     if (reminderText) {
         reminders.push(reminderText);
+        saveData();
         updateDashboardStats();
     }
 }
@@ -93,25 +103,39 @@ function updateDashboardStats() {
 
     // Update upcoming reminders **only if necessary**
     const upcomingRemindersList = document.getElementById('upcomingRemindersList');
-    const existingReminders = Array.from(upcomingRemindersList.children).map(li => li.textContent);
+    upcomingRemindersList.innerHTML = ''; 
 
-    if (JSON.stringify(existingReminders) !== JSON.stringify(reminders)) {
-        upcomingRemindersList.innerHTML = ''; // Only clear if something has changed
-        reminders.forEach(reminder => {
-            const li = document.createElement('li');
-            li.textContent = reminder;
-            upcomingRemindersList.appendChild(li);
-        });
-    }
+    reminders.forEach(reminder => {
+        const li = document.createElement('li');
+        li.textContent = reminder;
+        upcomingRemindersList.appendChild(li);
+    });
+
     saveData();
 }
 
-//Save data using local storage
+// Save data using local storage
 function saveData() {
     localStorage.setItem('medications', JSON.stringify(medications));
     localStorage.setItem('symptoms', JSON.stringify(symptoms));
+    localStorage.setItem('reminders', JSON.stringify(reminders));
 }
 
+// Load data from local storage
+function loadData() {
+    const storedMedications = localStorage.getItem('medications');
+    const storedSymptoms = localStorage.getItem('symptoms');
+    const storedReminders = localStorage.getItem('reminders');
+
+    if (storedMedications) medications = JSON.parse(storedMedications);
+    if (storedSymptoms) symptoms = JSON.parse(storedSymptoms);
+    if (storedReminders) reminders = JSON.parse(storedReminders);
+}
+
+// Initialize app on page load
 document.addEventListener('DOMContentLoaded', () => {
-    showSection('dashboard');
+    loadData();  // Load saved data
+    renderMedicationList();  // Show medications on load
+    updateDashboardStats();  // Refresh dashboard stats
+    showSection('dashboard');  // Default section
 });
