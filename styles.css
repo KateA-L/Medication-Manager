@@ -8,39 +8,36 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: 'Arial', sans-serif;
-    background-color: #E8F5F2;  /* Softer background */
+    background-color: #F5F5F5;  /* Neutral background */
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     color: #333;
+    padding: 0;
 }
 
-/* Container */
 .container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: stretch;
-    height: 100vh;  /* Ensure full height */
+    align-items: center;
+    height: 100vh;
     width: 100%;
     padding: 20px;
-    background-color: #FFFFFF;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    max-width: 1200px; /* Set a max width */
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Navbar */
+/* Navigation Bar */
 .navbar {
     background-color: #006D77;
     color: white;
     padding: 20px;
     border-radius: 10px;
-    flex-shrink: 0;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .navbar ul {
@@ -60,37 +57,39 @@ html, body {
     text-decoration: underline;
 }
 
-/* Highlight active navbar tab */
 .navbar a.active {
     text-decoration: underline;
-    font-weight: bold;
 }
 
-/* Sections */
+/* Hub Section (Main Content) */
 .hub-section {
     display: none;
+    width: 100%;
     padding: 20px;
-    flex-grow: 1;
-    overflow-y: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .hub-section.active {
     display: block;
 }
 
-/* Stats Container */
-.stats-container {
+/* Dashboard Layout */
+.dashboard-content {
     display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .stat-box {
     width: 30%;
+    min-width: 280px;
     padding: 20px;
     background-color: #A8DADC;
     border-radius: 12px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
     flex-shrink: 0;
     transition: transform 0.3s ease-in-out;
@@ -115,9 +114,20 @@ html, body {
     transition: width 0.5s ease-in-out;
 }
 
+.stats-container {
+    margin-top: 20px;
+}
+
+/* Form Layout (for Medication, Symptoms, etc.) */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
 /* Buttons */
 button {
-    width: 100%;
     padding: 12px;
     background-color: #006D77;
     color: white;
@@ -130,14 +140,10 @@ button {
 }
 
 button:hover {
-    background-color: #005461;
+    background-color: #005661;
 }
 
 /* Medication & Symptom Forms */
-.medication-form, .symptom-tracker {
-    margin-bottom: 20px;
-}
-
 input, textarea {
     width: 100%;
     padding: 12px;
@@ -208,7 +214,16 @@ ul li:hover {
     background-color: #D4F1F4;
 }
 
-/* Enhance spacing and alignment for form inputs */
+/* Form Layout for each section */
+.medication-form, .symptom-tracker, .reminder-form {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
 label {
     display: block;
     margin-bottom: 8px;
@@ -217,7 +232,24 @@ label {
     color: #333;
 }
 
-/* Add subtle hover effects for buttons */
-button:hover {
-    background-color: #005661;
+/* List for reminders, medications, symptoms */
+ul {
+    list-style-type: none;
+    padding-left: 0;
 }
+
+ul li {
+    background-color: #FFDDD2;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Improve spacing for all sections */
+.hub-section {
+    padding: 30px;
+    margin-top: 20px;
+}
+
