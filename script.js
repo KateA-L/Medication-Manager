@@ -4,17 +4,14 @@ let reminders = [];
 
 // Show selected section
 function showSection(sectionId) {
-    const sections = document.querySelectorAll('.hub-section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    const activeSection = document.getElementById(sectionId);
-    activeSection.classList.add('active');
-    
-    if (sectionId === 'dashboard') {
-        updateDashboardStats();
-    }
+    document.querySelectorAll('.hub-section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+
+    // HIGHLIGHT ACTIVE NAVIGATION TAB
+    document.querySelectorAll('.navbar a').forEach(link => link.classList.remove('active'));
+    document.querySelector(`.navbar a[href*="${sectionId}"]`).classList.add('active');
+
+    if (sectionId === 'dashboard') updateDashboardStats();
 }
 
 // Add medication to list
@@ -47,6 +44,14 @@ function renderMedicationList() {
         medicationList.appendChild(medItem);
     });
 }
+
+//Remove medication
+function removeMedication(index) {
+    medications.splice(index, 1);
+    saveData();
+    renderMedicationList();
+}
+
 
 // Mark medication as taken
 function markAsTaken(index) {
@@ -98,6 +103,12 @@ function updateDashboardStats() {
         li.textContent = reminder;
         upcomingRemindersList.appendChild(li);
     });
+}
+
+//Save data using local storage
+function saveData() {
+    localStorage.setItem('medications', JSON.stringify(medications));
+    localStorage.setItem('symptoms', JSON.stringify(symptoms));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
