@@ -5,10 +5,10 @@
 }
 
 html, body {
-    height: 100%;  /* Make sure the body takes up the full screen height */
-    width: 100%;   /* Ensure the body takes up the full screen width */
-    font-family: Arial, sans-serif;
-    background-color: #EDF6F9;
+    height: 100%;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #E8F5F2;  /* Softer background */
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -16,26 +16,31 @@ html, body {
     color: #333;
 }
 
+/* Container */
 .container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    height: 100%;  /* Make sure the container takes up the full height of the screen */
+    height: 100vh;  /* Ensure full height */
     width: 100%;
     padding: 20px;
-    background-color: #EDF6F9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+    max-width: 1200px; /* Set a max width */
+    margin: 0 auto;
 }
 
+/* Navbar */
 .navbar {
     background-color: #006D77;
     color: white;
-    padding: 15px;
-    border-radius: 5px;
-    flex-shrink: 0;  /* Prevent navbar from shrinking */
+    padding: 20px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    margin-bottom: 20px;
 }
 
 .navbar ul {
@@ -55,10 +60,17 @@ html, body {
     text-decoration: underline;
 }
 
+/* Highlight active navbar tab */
+.navbar a.active {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Sections */
 .hub-section {
     display: none;
     padding: 20px;
-    flex-grow: 1;  /* Allow the section to take up available space */
+    flex-grow: 1;
     overflow-y: auto;
 }
 
@@ -66,6 +78,7 @@ html, body {
     display: block;
 }
 
+/* Stats Container */
 .stats-container {
     display: flex;
     justify-content: space-around;
@@ -74,60 +87,77 @@ html, body {
 
 .stat-box {
     width: 30%;
-    padding: 15px;
-    background-color: #83C5BE;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #A8DADC;
+    border-radius: 12px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
     flex-shrink: 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.stat-box:hover {
+    transform: scale(1.05);
 }
 
 .progress-bar {
     width: 100%;
-    height: 20px;
-    background-color: #EDF6F9;
-    border-radius: 5px;
-    margin-top: 10px;
+    height: 18px;
+    background-color: #F1FAEE;
+    border-radius: 8px;
+    margin-top: 12px;
 }
 
 .progress {
     height: 100%;
     background-color: #006D77;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: width 0.5s ease-in-out;
 }
 
+/* Buttons */
 button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: #006D77;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #006D77;
+    background-color: #005461;
 }
 
+/* Medication & Symptom Forms */
 .medication-form, .symptom-tracker {
     margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
 input, textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 10px;
     border: 1px solid #FFDDD2;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s ease;
 }
 
+input:focus, textarea:focus {
+    border-color: #006D77;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Medication List */
 #medicationList {
     margin-top: 20px;
 }
@@ -137,11 +167,29 @@ input, textarea {
     justify-content: space-between;
     align-items: center;
     background-color: #FFDDD2;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
 }
 
+.medication-item:hover {
+    background-color: #D4F1F4;
+}
+
+.medication-item button {
+    min-width: 100px;
+    background-color: #FF6B6B;
+    border-radius: 8px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.medication-item button:hover {
+    background-color: #FF4D4D;
+}
+
+/* Reminder List */
 ul {
     list-style-type: none;
     padding-left: 0;
@@ -149,7 +197,27 @@ ul {
 
 ul li {
     background-color: #FFDDD2;
-    padding: 8px;
-    margin-bottom: 5px;
-    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+ul li:hover {
+    background-color: #D4F1F4;
+}
+
+/* Enhance spacing and alignment for form inputs */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Add subtle hover effects for buttons */
+button:hover {
+    background-color: #005661;
 }
