@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;  /* Make sure the body takes up the full screen height */
+    width: 100%;   /* Ensure the body takes up the full screen width */
+    font-family: Arial, sans-serif;
+    background-color: #EDF6F9;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    height: 100%;  /* Make sure the container takes up the full height of the screen */
+    width: 100%;
+    padding: 20px;
+    background-color: #EDF6F9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.navbar {
+    background-color: #006D77;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    flex-shrink: 0;  /* Prevent navbar from shrinking */
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.hub-section {
+    display: none;
+    padding: 20px;
+    flex-grow: 1;  /* Allow the section to take up available space */
+    overflow-y: auto;
+}
+
+.hub-section.active {
+    display: block;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.stat-box {
+    width: 30%;
+    padding: 15px;
+    background-color: #83C5BE;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #EDF6F9;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #006D77;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #006D77;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #006D77;
+}
+
+.medication-form, .symptom-tracker {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #FFDDD2;
+    border-radius: 5px;
+}
+
+#medicationList {
+    margin-top: 20px;
+}
+
+.medication-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFDDD2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    background-color: #FFDDD2;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
