@@ -29,21 +29,17 @@ function addMedication() {
     }
 }
 
-// Render the medication list
+// Render the medication list including remove button
 function renderMedicationList() {
     const medicationList = document.getElementById('medicationList');
     medicationList.innerHTML = '';
-    
-    medications.forEach((medication, index) => {
-        const medItem = document.createElement('div');
-        medItem.classList.add('medication-item');
-        medItem.innerHTML = `
-            <span>${medication.name} - ${medication.dose}</span>
-            <button onclick="markAsTaken(${index})">${medication.taken ? 'Taken' : 'Mark as Taken'}</button>
-        `;
-        medicationList.appendChild(medItem);
-    });
-}
+    medicationList.innerHTML += `
+    <div class="medication-item">
+        <span>${med.name} - ${med.dose}</span>
+        <button onclick="markAsTaken(${index})">${med.taken ? '✔ Taken' : 'Mark as Taken'}</button>
+        <button onclick="removeMedication(${index})">🗑 Remove</button>
+    </div>`;
+};
 
 //Remove medication
 function removeMedication(index) {
@@ -52,10 +48,10 @@ function removeMedication(index) {
     renderMedicationList();
 }
 
-
 // Mark medication as taken
 function markAsTaken(index) {
     medications[index].taken = true;
+    saveData();
     renderMedicationList();
     updateDashboardStats();
 }
@@ -94,15 +90,20 @@ function updateDashboardStats() {
     
     // Update symptom count
     document.getElementById('symptomCount').textContent = `Symptoms logged: ${symptoms.length}`;
-    
-    // Upcoming reminders
+
+    // Update upcoming reminders **only if necessary**
     const upcomingRemindersList = document.getElementById('upcomingRemindersList');
-    upcomingRemindersList.innerHTML = '';
-    reminders.forEach(reminder => {
-        const li = document.createElement('li');
-        li.textContent = reminder;
-        upcomingRemindersList.appendChild(li);
-    });
+    const existingReminders = Array.from(upcomingRemindersList.children).map(li => li.textContent);
+
+    if (JSON.stringify(existingReminders) !== JSON.stringify(reminders)) {
+        upcomingRemindersList.innerHTML = ''; // Only clear if something has changed
+        reminders.forEach(reminder => {
+            const li = document.createElement('li');
+            li.textContent = reminder;
+            upcomingRemindersList.appendChild(li);
+        });
+    }
+    saveData();
 }
 
 //Save data using local storage
