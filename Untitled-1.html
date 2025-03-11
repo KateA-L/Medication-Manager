@@ -12,8 +12,24 @@
         <div class="medication-form">
             <label for="medName">Medication Name:</label>
             <input type="text" id="medName" placeholder="Enter medication name">
+
             <label for="medDose">Dosage:</label>
             <input type="text" id="medDose" placeholder="Enter dosage">
+
+            <label for="medTimeframe">Timeframe:</label>
+            <select id="medTimeframe">
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="As Needed">As Needed</option>
+            </select>
+
+            <label for="medTime">Time of Day:</label>
+            <input type="time" id="medTime">
+
+            <label for="medFrequency">Times per Day:</label>
+            <input type="number" id="medFrequency" min="1" value="1">
+
             <button onclick="addMedication()">Add Medication</button>
         </div>
 
