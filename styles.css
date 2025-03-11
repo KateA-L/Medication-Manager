@@ -232,7 +232,38 @@ label {
     color: #333;
 }
 
-/* List for reminders, medications, symptoms */
+#medicationList {
+    margin-top: 20px;
+}
+
+.medication-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFDDD2;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: backgrount-color 0.3s ease;
+}
+
+.medication-item:hover {
+    background-color: #D4F1F4;
+}
+
+.medication-item button {
+    min-width: 100px;
+    background-color: #FF6B6B;
+    border-radius: 8px;
+    color: white;
+    transition: background-color 0.3s ease;    
+}
+
+.medication-item button:hover {
+    background-color: #D4F1F4;
+}
+
+/* List general reminders */
 ul {
     list-style-type: none;
     padding-left: 0;
