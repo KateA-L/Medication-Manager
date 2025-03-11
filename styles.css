@@ -8,7 +8,7 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: 'Arial', sans-serif;
-    background-color: #F5F5F5;  /* Neutral background */
+    background-color: #A8DADC;  /* Neutral background */
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -87,7 +87,7 @@ html, body {
     width: 30%;
     min-width: 280px;
     padding: 20px;
-    background-color: #A8DADC;
+    background-color: #D4F1F4;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
