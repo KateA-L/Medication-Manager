@@ -101,17 +101,28 @@ html, body {
 
 .progress-bar {
     width: 100%;
-    height: 18px;
+    height: 20px;
     background-color: #F1FAEE;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-top: 12px;
+    overflow: hidden;
+    border: 1px solid #006D77;
 }
 
 .progress {
     height: 100%;
+    width: 0%;
     background-color: #006D77;
     border-radius: 8px;
     transition: width 0.5s ease-in-out;
+}
+
+#adherenceText {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
 }
 
 .stats-container {
