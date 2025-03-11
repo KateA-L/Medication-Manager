@@ -19,15 +19,21 @@ function showSection(sectionId) {
 function addMedication() {
     const name = document.getElementById('medName').value.trim();
     const dose = document.getElementById('medDose').value.trim();
+    const timeframe = document.getElementById('medTimeframe').value;
+    const time = document.getElementById('medTime').value;
+    const frequency = parseInt(document.getElementById('medFrequency').value) 
     
-    if (name && dose) {
-        medications.push({ name, dose, taken: false });
+    if (name && dose && time && frequency > 0) {
+        medications.push({ name, dose, timeframe, time, frequency, taken: false });
         saveData();  // Save after adding medication
         renderMedicationList();
+
         document.getElementById('medName').value = '';
         document.getElementById('medDose').value = '';
+        document.getElementById('medTime').value = '';
+        document.getElementById('medFrequency').value = 1;
     } else {
-        alert("Please enter both medication name and dosage.");
+        alert("Please fill in all fields");
     }
 }
 
