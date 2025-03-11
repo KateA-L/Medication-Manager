@@ -14,7 +14,7 @@ html, body {
     align-items: flex-start;
     flex-direction: column;
     color: #333;
-    padding: 0;
+    padding: 10px;
 }
 
 .container {
@@ -27,38 +27,6 @@ html, body {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-/* Navigation Bar */
-.navbar {
-    background-color: #006D77;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.navbar ul {
-    display: flex;
-    justify-content: space-around;
-    list-style-type: none;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-}
-
-.navbar a.active {
-    text-decoration: underline;
 }
 
 /* Hub Section (Main Content) */
