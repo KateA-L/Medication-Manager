@@ -45,8 +45,13 @@ function renderMedicationList() {
     medications.forEach((med, index) => {
         const medItem = document.createElement('div');
         medItem.className = 'medication-item';
+
         medItem.innerHTML = `
-            <span>${med.name} - ${med.dose}</span>
+            <div>
+            <strong>${med.name}</strong> - ${med.dose}<br>
+            <small>${med.timeframe} at $${med.time} (${med.frequency}x per day)</small>
+            </div>
+
             <button onclick="markAsTaken(${index})">${med.taken ? '✔ Taken' : 'Mark as Taken'}</button>
             <button onclick="removeMedication(${index})">🗑 Remove</button>
         `;
@@ -125,6 +130,7 @@ function saveData() {
     localStorage.setItem('medications', JSON.stringify(medications));
     localStorage.setItem('symptoms', JSON.stringify(symptoms));
     localStorage.setItem('reminders', JSON.stringify(reminders));
+    localStroage.setItem('medications', JSON.stringify(medications));
 }
 
 // Load data from local storage
