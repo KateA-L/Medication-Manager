@@ -49,7 +49,7 @@ function renderMedicationList() {
         medItem.innerHTML = `
             <div>
             <strong>${med.name}</strong> - ${med.dose}<br>
-            <small>${med.timeframe} at $${med.time} (${med.frequency}x per day)</small>
+            <small>${med.timeframe} at ${med.time} (${med.frequency}x per day)</small>
             </div>
 
             <button onclick="markAsTaken(${index})">${med.taken ? '✔ Taken' : 'Mark as Taken'}</button>
@@ -57,6 +57,7 @@ function renderMedicationList() {
         `;
         medicationList.appendChild(medItem);
     });
+    saveData();
 }
 
 // Remove medication
@@ -130,7 +131,7 @@ function saveData() {
     localStorage.setItem('medications', JSON.stringify(medications));
     localStorage.setItem('symptoms', JSON.stringify(symptoms));
     localStorage.setItem('reminders', JSON.stringify(reminders));
-    localStroage.setItem('medications', JSON.stringify(medications));
+    localStorage.setItem('medications', JSON.stringify(medications));
 }
 
 // Load data from local storage
