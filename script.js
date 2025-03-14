@@ -1,8 +1,9 @@
 let medications = [];
+let medicationLog = [];
 let symptoms = [];
 let reminders = [];
 
-// Show selected section
+/*
 function showSection(sectionId) {
     document.querySelectorAll('.hub-section').forEach(sec => sec.classList.remove('active'));
     document.getElementById(sectionId).classList.add('active');
@@ -14,6 +15,7 @@ function showSection(sectionId) {
 
     if (sectionId === 'dashboard') updateDashboardStats();
 }
+*/
 
 // Add medication to list
 function addMedication() {
