@@ -1,36 +1,85 @@
+/* Reset Default Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Page Styling */
 html, body {
     height: 100%;
     width: 100%;
     font-family: 'Arial', sans-serif;
-    background-color: #A8DADC;  /* Neutral background */
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
+    background-color: #A8DADC; 
     color: #333;
     padding: 10px;
 }
 
-.container {
+/* Main Dashboard Container */
+.dashboard-container {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     height: 100vh;
-    width: 100%;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
-/* Hub Section (Main Content) */
-.hub-section {
+/* Sidebar Navigation */
+.sidebar {
+    width: 250px;
+    background-color: #1E293B;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    width: 100%;
+}
+
+.sidebar li {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar li:hover {
+    background-color: #334155;
+}
+
+.sidebar li.active {
+    background-color: #475569;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Dashboard Header */
+header {
+    background-color: #1E293B;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+/* Sections */
+.dashboard-section {
     display: none;
     width: 100%;
     padding: 20px;
@@ -39,27 +88,25 @@ html, body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.hub-section.active {
+.dashboard-section.active {
     display: block;
 }
 
-/* Dashboard Layout */
-.dashboard-content {
+/* Dashboard Grid */
+.stat-grid {
     display: flex;
-    justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
 }
 
 .stat-box {
-    width: 30%;
+    flex: 1;
     min-width: 280px;
     padding: 20px;
     background-color: #D4F1F4;
     border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
-    flex-shrink: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -67,6 +114,7 @@ html, body {
     transform: scale(1.05);
 }
 
+/* Progress Bar */
 .progress-bar {
     width: 100%;
     height: 20px;
@@ -93,16 +141,36 @@ html, body {
     text-align: center;
 }
 
-.stats-container {
-    margin-top: 20px;
+/* Medication Form */
+.medication-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-/* Form Layout (for Medication, Symptoms, etc.) */
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.medication-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.medication-form input,
+.medication-form select {
     width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #CBD5E1;
+    font-size: 16px;
+}
+
+.medication-form input:focus,
+.medication-form select:focus {
+    border-color: #006D77;
+    outline: none;
 }
 
 /* Buttons */
@@ -111,7 +179,7 @@ button {
     background-color: #006D77;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
@@ -120,26 +188,6 @@ button {
 
 button:hover {
     background-color: #005661;
-}
-
-/* Medication & Symptom Forms */
-input, textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #FFDDD2;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border 0.3s ease;
-}
-
-input:focus, textarea:focus {
-    border-color: #006D77;
-    outline: none;
-}
-
-textarea {
-    resize: vertical;
 }
 
 /* Medication List */
@@ -174,81 +222,50 @@ textarea {
     background-color: #FF4D4D;
 }
 
-/* Reminder List */
-ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-ul li {
-    background-color: #FFDDD2;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-ul li:hover {
-    background-color: #D4F1F4;
-}
-
-/* Form Layout for each section */
-.medication-form, .symptom-tracker, .reminder-form {
-    margin-bottom: 20px;
+/* Symptom Tracker */
+.symptom-tracker {
+    background-color: white;
     padding: 20px;
-    background-color: #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
+.symptom-tracker textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
     font-size: 16px;
-    font-weight: bold;
-    color: #333;
 }
 
-#medicationList {
+.symptom-tracker textarea:focus {
+    border-color: #006D77;
+    outline: none;
+}
+
+/* Reminder Section */
+.reminders {
     margin-top: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.medication-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #FFDDD2;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    transition: backgrount-color 0.3s ease;
+.reminders button {
+    width: 100%;
 }
 
-.medication-item:hover {
-    background-color: #D4F1F4;
-}
-
-.medication-item button {
-    min-width: 100px;
-    background-color: #FF6B6B;
-    border-radius: 8px;
-    color: white;
-    transition: background-color 0.3s ease;    
-}
-
-.medication-item button:hover {
-    background-color: #D4F1F4;
-}
-
-/* List general reminders */
-ul {
+/* Reminder List */
+.reminder-list {
     list-style-type: none;
-    padding-left: 0;
+    padding: 0;
+    margin-top: 10px;
 }
 
-ul li {
+.reminder-list li {
     background-color: #FFDDD2;
     padding: 10px;
     margin-bottom: 8px;
@@ -257,8 +274,35 @@ ul li {
     transition: background-color 0.3s ease;
 }
 
-/* Improve spacing for all sections */
-.hub-section {
-    padding: 30px;
-    margin-top: 20px;
+.reminder-list li:hover {
+    background-color: #D4F1F4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        text-align: center;
+    }
+
+    .sidebar ul {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .stat-grid {
+        flex-direction: column;
+    }
+
+    .stat-box {
+        width: 100%;
+    }
 }
