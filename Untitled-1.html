@@ -47,47 +47,56 @@
             <ul id="symtomList"></ul>
         </section>
 
-        <div class="medication-form">
-            <label for="medName">Medication Name:</label>
-            <input type="text" id="medName" placeholder="Enter medication name">
-
-            <label for="medDose">Dosage:</label>
-            <input type="text" id="medDose" placeholder="Enter dosage">
-
-            <label for="medTimeframe">Timeframe:</label>
-            <select id="medTimeframe">
-                <option value="Daily">Daily</option>
-                <option value="Weekly">Weekly</option>
-                <option value="Monthly">Monthly</option>
-                <option value="As Needed">As Needed</option>
-            </select>
-
-            <label for="medTime">Time of Day:</label>
-            <input type="time" id="medTime">
-
-            <label for="medFrequency">Times per Day:</label>
-            <input type="number" id="medFrequency" min="1" value="1">
-
-            <button onclick="addMedication()">Add Medication</button>
-        </div>
-
-        <h2>Your Medications</h2>
-        <div id="medicationList">
-            <!-- Medications will appear here -->
-        </div>
-
-        <div class="reminders">
-            <button onclick="setReminder()">Set Reminder</button>
-        </div>
-
-        <div class="symptom-tracker">
-            <h3>Symptom Tracker</h3>
-            <textarea id="symptomText" placeholder="Log your symptoms here..."></textarea>
-            <button onclick="logSymptom()">Log Symptom</button>
-            <div id="symptomLog">
-                <!-- Logged symptoms will appear here -->
+        <section id="medications" class="dashboard-section">
+            <h2>Manage Medications</h2>
+            <div class="medication-form">
+                <label for="medName">Medication Name:</label>
+                <input type="text" id="medName" placeholder="Enter medication name">
+    
+                <label for="medDose">Dosage:</label>
+                <input type="text" id="medDose" placeholder="Enter dosage">
+    
+                <label for="medTimeframe">Timeframe:</label>
+                <select id="medTimeframe">
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="As Needed">As Needed</option>
+                </select>
+    
+                <label for="medTime">Time of Day:</label>
+                <input type="time" id="medTime">
+    
+                <label for="medFrequency">Times per Day:</label>
+                <input type="number" id="medFrequency" min="1" value="1">
+    
+                <button onclick="addMedication()">Add Medication</button>
             </div>
-        </div>
+    
+            <h2>Your Medications</h2>
+            <div id="medicationList">
+                <!-- Medications will appear here -->
+            </div>
+        </section>
+
+        <section id="reminders" class="dashboard-section">
+            <h2>Set Reminders</h2>
+            <button onclick="setReminder()">+ Add Reminder</button>
+            <ul id="reminderList"></ul>
+        </section>
+
+        <section id="logs" class="dashboard-section">
+            <h2>Symptom and Side Effect Log</h2>
+            <div>
+                <label for="symptomText">Log Symptom</label>
+                <input type="text" id="symptomText">
+                <button onclick="logSymptom()">Log Symptom</button>
+            </div>
+
+            <h3>Logged Symptoms</h3>
+            <div id="symptomLog"></div>
+        </section>
+        
     </div>
 
     <script src="script.js"></script>
