@@ -7,8 +7,46 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Medication Manager</h1>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li data-section="overview" onclick="showSection('overview')">Overview</li>
+                <li data-section="medication" onclick="showSection('medications')">Medications</li>
+                <li data-section="remindera" onclick="showSection('reminders')">Reminders</li>
+                <li data-section="logs" onclick="showSection('logs')">Logs</li>
+            </ul>
+        </nav>
+
+    
+    <div class="main-content">
+        <header>
+            <h1>Medication Manager</h1>
+        </header>
+
+        <section id="overview" class="dashboard-section active">
+            <h2>Overview</h2>
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <h3>Total Medications</h3>
+                    <p><span id=medCount>0</span></p>
+                </div>
+                <div class="stat-box">
+                    <h3>Medication Progress</h3>
+                    <div class="progress-bar">
+                        <div id="adherenceProgress" class="progress"></div>
+                    </div>
+                    <p id="adherenceText">0% of medications taken</p>
+                </div>
+            </div>
+
+            <h3>Active Medications</h3>
+            <ul id="activeMedicationsList"></ul>
+
+            <h3>Logged Symptoms</h3>
+            <ul id="symtomList"></ul>
+        </section>
+
         <div class="medication-form">
             <label for="medName">Medication Name:</label>
             <input type="text" id="medName" placeholder="Enter medication name">
@@ -49,14 +87,6 @@
             <div id="symptomLog">
                 <!-- Logged symptoms will appear here -->
             </div>
-        </div>
-
-        <div class="stat-box">
-            <h3>Medication Progress</h3>
-            <div class="progress-bar">
-                <div id="adherenceProgress" class="progress"></div>
-            </div>
-            <p id="adherenceText">0% of medications taken</p>
         </div>
     </div>
 

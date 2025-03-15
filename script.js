@@ -17,6 +17,14 @@ function showSection(sectionId) {
 }
 */
 
+// Load data on startup
+documen.addEventListener("DOMContentLoaded", () => {
+    loadData();
+    renderMedicationList();
+    renderMedicationLog();
+    checkMidnight();
+});
+
 // Add medication to list
 function addMedication() {
     const name = document.getElementById('medName').value.trim();
@@ -30,6 +38,7 @@ function addMedication() {
         saveData();  // Save after adding medication
         renderMedicationList();
 
+        // Clear input fields
         document.getElementById('medName').value = '';
         document.getElementById('medDose').value = '';
         document.getElementById('medTime').value = '';
@@ -69,6 +78,8 @@ function removeMedication(index) {
     renderMedicationList();
     updateDashboardStats(); // Ensure dashboard updates after removal
 }
+
+
 
 // Mark medication as taken
 function markAsTaken(index) {
