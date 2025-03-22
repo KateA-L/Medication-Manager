@@ -74,6 +74,7 @@ function renderMedicationList() {
         medicationList.appendChild(medItem);
     });
     saveData();
+    updateDashboardStats();
 }
 
 // Remove Medication
@@ -126,6 +127,23 @@ function updateDashboardStats() {
     document.getElementById('adherenceProgress').style.width = `${adherencePercentage}%`;
     document.getElementById('adherenceText').textContent = `${adherencePercentage.toFixed(0)}% of medications taken`;
     
+    // Update active medications list
+    const activeMedicationsList = document.getElementById('activeMedicationsList');
+    activeMedicationsList.innerHTML = '';
+
+    medications.forEach(med => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <strong>${med.name}</strong> - ${med.dose} <br>
+            <small>${med.timeframe} at ${med.time} (${med.frequency}x per day)</small> <br>
+            <span style = "color: ${med.taken ? 'green' : 'red'}">
+                ${med.taken ? '✔ Taken' : '❌ Not Taken'} 
+            </span>
+        `;
+        activeMedicationsList.appendChild(li);
+    })
+
+
     document.getElementById('symptomList').innerHTML = symptoms.map(symptom => `<li>${symptom}</li>`).join('');
     
     const reminderList = document.getElementById('reminderList');
