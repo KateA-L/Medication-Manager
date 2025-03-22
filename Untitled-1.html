@@ -81,7 +81,11 @@
 
         <section id="reminders" class="dashboard-section">
             <h2>Set Reminders</h2>
-            <button onclick="setReminder()">+ Add Reminder</button>
+            <div class = "reminderForm">
+                <input type="text" id="reminderText" placeholder="Reminder Text">
+                <input type="time" id="reminderTime">
+                <button onclick="setReminder()">+ Add Reminder</button>
+            </div>
             <ul id="reminderList"></ul>
         </section>
 
