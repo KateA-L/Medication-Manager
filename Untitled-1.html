@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none':">
     <title>Medication Manager</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,7 +14,7 @@
             <ul>
                 <li data-section="overview" onclick="showSection('overview')">Overview</li>
                 <li data-section="medication" onclick="showSection('medications')">Medications</li>
-                <li data-section="remindera" onclick="showSection('reminders')">Reminders</li>
+                <li data-section="reminders" onclick="showSection('reminders')">Reminders</li>
                 <li data-section="logs" onclick="showSection('logs')">Logs</li>
             </ul>
         </nav>
@@ -42,9 +43,6 @@
 
             <h3>Active Medications</h3>
             <ul id="activeMedicationsList"></ul>
-
-            <h3>Logged Symptoms</h3>
-            <ul id="symtomList"></ul>
         </section>
 
         <section id="medications" class="dashboard-section">

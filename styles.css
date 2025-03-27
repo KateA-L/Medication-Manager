@@ -245,7 +245,7 @@ button:hover {
 }
 
 /* Reminder Section */
-.reminders {
+.reminder-form {
     margin-top: 20px;
     background-color: white;
     padding: 20px;
@@ -253,11 +253,15 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.reminders button {
-    width: 100%;
+.reminder-form input {
+    width: 45%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #CBD5E1;
+    border-radius: 5px;
 }
 
-/* Reminder List */
+
 .reminder-list {
     list-style-type: none;
     padding: 0;
@@ -269,12 +273,36 @@ button:hover {
     padding: 10px;
     margin-bottom: 8px;
     border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-.reminder-list li:hover {
+.reminder-list li.completed {
     background-color: #D4F1F4;
+    text-decoration: line-through;
+}
+
+.reminder-list button {
+    background-color: #006D77;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.reminder-list button:hover{
+    background-color: #1E293B;
+}
+
+.reminder-item.completed {
+    background-color: #D4F1F4;
+    text-decoration: line-through;
+    opacity: 0.7;
 }
 
 /* Responsive Design */
