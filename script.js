@@ -2,6 +2,81 @@ let medications = [];
 let symptoms = [];
 let reminders = [];
 
+//Use AES-GCM encryption to protect stored data
+//generate secure encryption key
+async function getKey() {
+    if (!window.encryptionKey) {
+        const rawKey = await crypto.subtle.generateKey(
+            { name: "AES-GCM", length: 256 },
+            true,
+            ["encrypt", "decrypt"]
+        );
+        window.encryptionKey = rawKey;
+    }
+    return window.encryptionKey;
+}
+
+//encrypt data
+async function encryptData(data) {
+    const key = await getKey;
+    const encodedData = new TextEncoder().encode(JSON.stringify(data));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const encryptedData = await crypto.subtle.encrypt(
+        { name: "AES-GCM", iv: iv },
+        key,
+        encodedData,
+    );
+    return {
+        encrypted: btoa(String.fromCharCode(...new Uint8Array(encryptData))),
+        iv: btoa(String.fromCharCode(...iv))
+    };
+}
+
+//decrypt data
+async function decryptData(encryptedData, iv) {
+    try {
+        const key = await getKey();
+        const encryptedBytes = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
+        const ivBytes = Uint8Array.from(atob(iv), c => c.charCodeAt(0));
+        const decryptedData = await crypto.subtle.decrypt(
+            { name: "AES-GCM", iv: ivBytes },
+            key,
+            encryptedBytes
+        );
+        return JSON.parse(new TextDecoder().decode(decryptedData));
+    } catch (e) {
+        console.warn("Failed to decrypt data");
+        return null;
+    }  
+}
+
+//save encrypted data
+async function saveData() {
+    localStorage.setItem("medications", JSON.stringify(await encryptData(medications)));
+    localStorage.setItem("symptoms", JSON.stringify(await encryptData(symptoms)));
+    localStorage.setItem("reminders", JSON.stringify(await encryptData(reminders)));
+}
+
+//load data securely
+async function loadData() {
+    const medData = JSON.parse(localStorage.getItem("medications"));
+    const sympData = JSON.parse(localStorage.getItem("symptoms"));
+    const remData = JSON.parse(localStorage.getItem("reminders"));
+
+    medications = medData ? await decryptData(medData.encrypted, medData.iv) || [] : [];
+    symptoms = sympData ? await decryptData(sympData.encrypted, sympData.iv) || [] : [];
+    reminders = remData ? await decryptData(remData.encrypted, remData.iv) || [] : [];
+
+    renderMedicationList();
+    renderReminders();
+    updateDashboardStats();
+}
+
+//prevent malicious script injections into localStorage
+function sanitiseInput(input) {
+    return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 // Function to Show Sections
 function showSection(sectionId) {
     // Hide all sections
@@ -36,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Add reminder with time and notification
 function setReminder(){
-    const reminderText = document.getElementById('reminderText').value.trim();
+    const reminderText = sanitiseInput(document.getElementById('reminderText').value.trim());
     const reminderTime = document.getElementById('reminderTime').value;
 
     if (reminderText && reminderTime) {
@@ -134,22 +209,26 @@ function checkReminders() {
     }, 30000); // Check every 30 seconds
 }
 
+
 // Add Medication
 function addMedication() {
-    const name = document.getElementById('medName').value.trim();
-    const dose = document.getElementById('medDose').value.trim();
-    const timeframe = document.getElementById('medTimeframe').value;
+    const name = sanitiseInput(document.getElementById('medName').value.trim());
+    const dose = sanitiseInput(document.getElementById('medDose').value.trim());
+    const timeframe = sanitiseInput(document.getElementById('medTimeframe').value);
     const time = document.getElementById('medTime').value;
     const frequency = parseInt(document.getElementById('medFrequency').value);
     
     if (name && dose && time && frequency > 0) {
         medications.push({ name, dose, timeframe, time, frequency, taken: false });
-        saveData();
-        renderMedicationList();
+
+        //clear form fields
         document.getElementById('medName').value = '';
         document.getElementById('medDose').value = '';
         document.getElementById('medTime').value = '';
         document.getElementById('medFrequency').value = 1;
+
+        saveData();
+        renderMedicationList();
     } else {
         alert("Please fill in all fields");
     }
