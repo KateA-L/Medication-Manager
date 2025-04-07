@@ -14,6 +14,14 @@ html, body {
     color: #333;
 }
 
+.logo {
+    width: 90px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+
 /* Main Dashboard Container */
 .dashboard-container {
     display: flex;

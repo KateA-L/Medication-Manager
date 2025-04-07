@@ -2,6 +2,7 @@ let medications = [];
 let symptoms = [];
 let reminders = [];
 
+
 //Use AES-GCM encryption to protect stored data
 //generate secure encryption key
 async function getKey() {
@@ -107,6 +108,28 @@ document.addEventListener("DOMContentLoaded", () => {
             showSection(section);
         });
     });
+});
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const storedPIN = localStorage.getItem("userPIN");
+
+    if (!storedPIN) {
+        const newPIN = prompt("Set a 4-digit PIN for security:");
+        if (newPIN && /^\d{4}$/.test(newPIN)) {
+            localStorage.setItem("userPIN", btoa(newPIN)); // Encrypt PIN (Base64)
+        } else {
+            alert("Invalid PIN. Reload to try again.");
+            return;
+        }
+    }
+
+    const enteredPIN = prompt("Enter your PIN to access:");
+    if (btoa(enteredPIN) !== localStorage.getItem("userPIN")) {
+        alert("Access denied");
+        document.body.innerHTML = ""; // Hide the app
+    } else {
+        await loadData();
+    }
 });
 
 // Add reminder with time and notification
